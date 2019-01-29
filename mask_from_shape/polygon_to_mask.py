@@ -139,6 +139,8 @@ def convert_polygon_to_mask_w_shape(gis_image_file, gt_shape, output_file):
     cv2.fillPoly(img_building,building_insert,(255))
     cv2.fillPoly(img_building,buliding_delete,(0))
     cv2.imwrite(building_filename, img_building)
+
+
     # road mask
     img_road = np.zeros((rows,cols), dtype=np.uint8)
     cv2.fillPoly(img_road,road_insert,(255))
@@ -248,10 +250,15 @@ def convert_polygon_to_mask(gis_image_file, shape_file, output_file):
                     for idx in range(1,len(points)):
                         building_delete.append(convertPoint(points[idx],gio_transform))
 
-                elif feat['properties']['fclass'] == 'road':
+                elif feat['properties']['fclass'] == None or feat['properties']['fclass'] == 'secondary':
                     road_insert.append(convertPoint(points[0],gio_transform))
                     for idx in range(1,len(points)):
                         road_delete.append(convertPoint(points[idx],gio_transform))
+
+                # elif feat['properties']['fclass'] == 'road':
+                #     road_insert.append(convertPoint(points[0],gio_transform))
+                #     for idx in range(1,len(points)):
+                #         road_delete.append(convertPoint(points[idx],gio_transform))
 
                 with open('polygon_more_than_2.csv','a') as fd:
                     fd.write(gis_image_file+'\n')
@@ -261,7 +268,7 @@ def convert_polygon_to_mask(gis_image_file, shape_file, output_file):
     road_filename = output_file[:-4] + "_road" + output_file[-4:]
     # building mask
     img_building = np.zeros((rows,cols), dtype=np.uint8)
-    cv2.fillPoly(img_building,building_insert,(255))
+    cv2.fillPoly(img_building,building_insert,(128))
     cv2.fillPoly(img_building,building_delete,(0))
     cv2.imwrite(building_filename, img_building)
     # road mask
@@ -270,7 +277,7 @@ def convert_polygon_to_mask(gis_image_file, shape_file, output_file):
     cv2.fillPoly(img_road,road_delete,(0))
     cv2.imwrite(road_filename, img_road)
     # building and road mask
-    cv2.fillPoly(img_building,road_insert,(128))
+    cv2.fillPoly(img_building,road_insert,(255))
     cv2.fillPoly(img_building,road_delete,(0))
     cv2.imwrite(output_file,img_building)
 
