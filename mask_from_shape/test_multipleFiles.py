@@ -5,10 +5,10 @@ import time
 
 from openpyxl import Workbook
 
-selected_folder = '/Users/sukryool.kang/Projects/Geospatial Project/Data_For AI Team/LosAngeles_2017/DSMOrtho'
-mask_folder = '/Users/sukryool.kang/Projects/Geospatial Project/Data_For AI Team/LosAngeles_2017/Mask'
-shape_file = '/Users/sukryool.kang/Projects/Geospatial Project/Data_For AI Team/LA__Road_Ground_truth/Vector_LA1-32-33-35-36-37/LA1-32-33-35-36-37.shp'
-
+selected_folder = '/Users/sukryool.kang/data/GIS_data/LosAngeles_2017/DSMOrtho'
+mask_folder = '/Users/sukryool.kang/data/GIS_data/LosAngeles_2017/Mask2'
+#shape_file = '/Users/sukryool.kang/Projects/Geospatial Project/Data_For AI Team/LA__Road_Ground_truth/Vector_LA1-32-33-35-36-37/LA1-32-33-35-36-37.shp'
+shape_file = '/Users/sukryool.kang/data/GIS_data/LosAngeles_2017/LA__Road_Ground_truth/Vector_LA_42-43-44-45/LA1-45-44-43-42.shp'
 if not os.path.exists(mask_folder):
     os.makedirs(mask_folder)
 
@@ -51,4 +51,4 @@ for building_file in building_image_files:
 for road_file in road_image_files:
     ws2.append([selected_folder,road_file])
 
-wb.save(os.path.join(selected_folder,'building_road_image_files.xlsx'))
+wb.save(os.path.join(selected_folder,'building_road_image_files_2.xlsx'))
