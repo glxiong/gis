@@ -5,17 +5,21 @@ import time
 
 from openpyxl import Workbook
 
+building_value = 1
+road_value = 2
+
 #building
 selected_folder = '/Users/sukryool.kang/data/GIS_data/LosAngeles_2017/DSMOrtho'
-mask_folder = '/Users/sukryool.kang/data/GIS_data/LosAngeles_2017/Mask'
-shape_file = '/Users/sukryool.kang/data/GIS_data/LosAngeles_2017/LA__Road_Ground_truth/Vector_LA1-32-33-35-36-37/LA1-32-33-35-36-37.shp'
+mask_folder = '/Users/sukryool.kang/data/GIS_data/LosAngeles_2017/Mask_tmp'
+#shape_file = '/Users/sukryool.kang/data/GIS_data/LosAngeles_2017/LA__Road_Ground_truth/Vector_LA1-32-33-35-36-37/LA1-32-33-35-36-37.shp'
+shape_file = '/Users/sukryool.kang/data/GIS_data/LosAngeles_2017/LA__Road_Ground_truth/Vector_LA_42-43-44-45/LA1-45-44-43-42.shp'
 meta_file = '/Users/sukryool.kang/data/GIS_data/LosAngeles_2017/building_road_image_files.xlsx'
 
 #road
-selected_folder = '/Users/sukryool.kang/data/GIS_data/LosAngeles_2017/Road_Images/33 Series'
-mask_folder = '/Users/sukryool.kang/data/GIS_data/LosAngeles_2017/Road_Mask'
-shape_file = '/Users/sukryool.kang/data/GIS_data/LosAngeles_2017/Phase 1 Road Polygon/Phase 1 Road Polygon.shp'
-meta_file = '/Users/sukryool.kang/data/GIS_data/LosAngeles_2017/road_image_files.xlsx'
+# selected_folder = '/Users/sukryool.kang/data/GIS_data/LosAngeles_2017/Road_Images/33 Series'
+# mask_folder = '/Users/sukryool.kang/data/GIS_data/LosAngeles_2017/Road_Mask'
+# shape_file = '/Users/sukryool.kang/data/GIS_data/LosAngeles_2017/Phase 1 Road Polygon/Phase 1 Road Polygon.shp'
+# meta_file = '/Users/sukryool.kang/data/GIS_data/LosAngeles_2017/road_image_files.xlsx'
 
 
 

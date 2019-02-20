@@ -8,6 +8,11 @@ import cv2
 from shapely.geometry import Point
 from shapely.geometry.polygon import Polygon
 
+#os.environ["GDAL_DATA"] = '/Users/sukryool.kang/anaconda3/share/gdal'
+
+building_value = 1
+road_value = 2
+
 def pointInsideImage(points,x_range,y_range):
 
     for each_poly in points:
@@ -80,7 +85,7 @@ def convert_polygon_to_mask_w_shape(gis_image_file, gt_shape, output_file):
     y_range = [bottom_right[1],top_left[1]]
 
     building_insert = []
-    buliding_delete = []  #hole
+    building_delete = []  #hole
 
     road_insert = []
     road_delete = []  # hole (Polygon inside Polygon)
@@ -136,18 +141,16 @@ def convert_polygon_to_mask_w_shape(gis_image_file, gt_shape, output_file):
     road_filename = output_file[:-4] + "_road" + output_file[-4:]
     # building mask
     img_building = np.zeros((rows,cols), dtype=np.uint8)
-    cv2.fillPoly(img_building,building_insert,(255))
+    cv2.fillPoly(img_building,building_insert,(building_value))
     cv2.fillPoly(img_building,buliding_delete,(0))
     cv2.imwrite(building_filename, img_building)
-
-
     # road mask
     img_road = np.zeros((rows,cols), dtype=np.uint8)
-    cv2.fillPoly(img_road,road_insert,(255))
+    cv2.fillPoly(img_road,road_insert,(road_value))
     cv2.fillPoly(img_road,road_delete,(0))
     cv2.imwrite(road_filename, img_road)
     # building and road mask
-    cv2.fillPoly(img_building,road_insert,(128))
+    cv2.fillPoly(img_building,road_insert,(road_value))
     cv2.fillPoly(img_building,road_delete,(0))
     cv2.imwrite(output_file,img_building)
 
@@ -266,20 +269,27 @@ def convert_polygon_to_mask(gis_image_file, shape_file, output_file):
     road_filename = output_file
     building_filename = output_file[:-4] + "_building" + output_file[-4:]
     road_filename = output_file[:-4] + "_road" + output_file[-4:]
+
+    img_building = np.zeros((rows, cols), dtype=np.uint8)
     # building mask
-    img_building = np.zeros((rows,cols), dtype=np.uint8)
-    cv2.fillPoly(img_building,building_insert,(128))
-    cv2.fillPoly(img_building,building_delete,(0))
-    cv2.imwrite(building_filename, img_building)
+    if building_insert:
+        # img_building = np.zeros((rows,cols), dtype=np.uint8)
+        cv2.fillPoly(img_building,building_insert,(building_value))
+        cv2.fillPoly(img_building,building_delete,(0))
+        cv2.imwrite(building_filename, img_building)
+
     # road mask
-    img_road = np.zeros((rows,cols), dtype=np.uint8)
-    cv2.fillPoly(img_road,road_insert,(255))
-    cv2.fillPoly(img_road,road_delete,(0))
-    cv2.imwrite(road_filename, img_road)
+    if road_insert:
+        img_road = np.zeros((rows,cols), dtype=np.uint8)
+        cv2.fillPoly(img_road,road_insert,(road_value))
+        cv2.fillPoly(img_road,road_delete,(0))
+        cv2.imwrite(road_filename, img_road)
     # building and road mask
-    cv2.fillPoly(img_building,road_insert,(255))
-    cv2.fillPoly(img_building,road_delete,(0))
-    cv2.imwrite(output_file,img_building)
+
+    if building_insert or road_insert:
+        cv2.fillPoly(img_building,road_insert,(road_value))
+        cv2.fillPoly(img_building,road_delete,(0))
+        cv2.imwrite(output_file,img_building)
 
     building_check = False
     road_check = False
