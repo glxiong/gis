@@ -10,8 +10,8 @@ from shapely.geometry.polygon import Polygon
 
 #os.environ["GDAL_DATA"] = '/Users/sukryool.kang/anaconda3/share/gdal'
 
-building_value = 1
-road_value = 2
+building_value = 255
+road_value = 128
 
 def pointInsideImage(points,x_range,y_range):
 
