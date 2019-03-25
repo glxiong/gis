@@ -7,11 +7,11 @@ import numpy as np
 from scipy import ndimage as ndi
 from scipy.ndimage.morphology import distance_transform_edt
 
-meta_file = '/Users/sukryool.kang/data/GIS_data/LosAngeles_2017/building_road_image_files_combine.xlsx'
+meta_file = '/Users/sukryool.kang/data/GIS_data/LosAngeles_2017/building_road_image_files_combine_final.xlsx'
 
 tile_mask_folder = '/Users/sukryool.kang/data/GIS_data/LosAngeles_2017/TILE_300/mask'
 tile_img_folder = '/Users/sukryool.kang/data/GIS_data/LosAngeles_2017/TILE_300/train/images'
-new_meta_file = '/Users/sukryool.kang/data/GIS_data/LosAngeles_2017/TILE_300/stage_metadata_new_2.csv'
+new_meta_file = '/Users/sukryool.kang/data/GIS_data/LosAngeles_2017/TILE_300/stage_metadata_new_resize.csv'
 
 # 7cm data -> tile_size
 tile_size = 500
@@ -92,10 +92,16 @@ def CreateTileImages(img_folder,mask_folder,img_file,tile_size,tile_img_folder,t
             rgb_patch  = rgb_image[tile_size*i:tile_size*(1+i), tile_size*j:tile_size*(1+j),:]
             mask_patch = mask_image[tile_size*i:tile_size*(1+i), tile_size*j:tile_size*(1+j)]
 
+            # resize image
+            rgb_patch = cv2.resize(rgb_patch, (image_size, image_size))
+            mask_patch = cv2.resize(mask_patch, (image_size, image_size))
+
             rgb_img_file = os.path.join( tile_img_folder,img_file[:-4] + "_" +  str(count).zfill(3) + '.tif')
             mask_file = os.path.join( tile_mask_folder+'/masks',img_file[:-4] + "_" +  str(count).zfill(3) + '.png')
             size_file = os.path.join( tile_mask_folder+'/sizes',img_file[:-4] + "_" +  str(count).zfill(3) )
             distance_file = os.path.join( tile_mask_folder+'/distances',img_file[:-4] + "_" +  str(count).zfill(3) )
+
+
 
             cv2.imwrite(rgb_img_file,rgb_patch)
             cv2.imwrite(mask_file,mask_patch)

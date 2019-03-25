@@ -10,9 +10,9 @@ road_value = 2
 
 #building
 selected_folder = '/Users/sukryool.kang/data/GIS_data/LosAngeles_2017/DSMOrtho'
-mask_folder = '/Users/sukryool.kang/data/GIS_data/LosAngeles_2017/Mask_tmp'
-#shape_file = '/Users/sukryool.kang/data/GIS_data/LosAngeles_2017/LA__Road_Ground_truth/Vector_LA1-32-33-35-36-37/LA1-32-33-35-36-37.shp'
-shape_file = '/Users/sukryool.kang/data/GIS_data/LosAngeles_2017/LA__Road_Ground_truth/Vector_LA_42-43-44-45/LA1-45-44-43-42.shp'
+mask_folder = '/Users/sukryool.kang/data/GIS_data/LosAngeles_2017/Mask_tmp_2'
+shape_file = '/Users/sukryool.kang/data/GIS_data/LosAngeles_2017/LA__Road_Ground_truth/Vector_LA1-32-33-35-36-37/LA1-32-33-35-36-37.shp'
+#shape_file = '/Users/sukryool.kang/data/GIS_data/LosAngeles_2017/LA__Road_Ground_truth/Vector_LA_42-43-44-45/LA1-45-44-43-42.shp'
 meta_file = '/Users/sukryool.kang/data/GIS_data/LosAngeles_2017/building_road_image_files.xlsx'
 
 #road
