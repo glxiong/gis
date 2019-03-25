@@ -276,16 +276,16 @@ def convert_polygon_to_mask(gis_image_file, shape_file, output_file):
         # img_building = np.zeros((rows,cols), dtype=np.uint8)
         cv2.fillPoly(img_building,building_insert,(building_value))
         cv2.fillPoly(img_building,building_delete,(0))
-        cv2.imwrite(building_filename, img_building)
+        #cv2.imwrite(building_filename, img_building)
 
     # road mask
-    if road_insert:
-        img_road = np.zeros((rows,cols), dtype=np.uint8)
-        cv2.fillPoly(img_road,road_insert,(road_value))
-        cv2.fillPoly(img_road,road_delete,(0))
-        cv2.imwrite(road_filename, img_road)
-    # building and road mask
+    # if road_insert:
+    #     img_road = np.zeros((rows,cols), dtype=np.uint8)
+    #     cv2.fillPoly(img_road,road_insert,(road_value))
+    #     cv2.fillPoly(img_road,road_delete,(0))
+    #     cv2.imwrite(road_filename, img_road)
 
+    # building and road mask
     if building_insert or road_insert:
         cv2.fillPoly(img_building,road_insert,(road_value))
         cv2.fillPoly(img_building,road_delete,(0))
