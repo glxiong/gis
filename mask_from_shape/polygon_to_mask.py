@@ -289,7 +289,8 @@ def convert_polygon_to_mask(gis_image_file, shape_file, output_file):
     if building_insert or road_insert:
         cv2.fillPoly(img_building,road_insert,(road_value))
         cv2.fillPoly(img_building,road_delete,(0))
-        cv2.imwrite(output_file,img_building)
+
+    cv2.imwrite(output_file,img_building)
 
     building_check = False
     road_check = False
