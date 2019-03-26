@@ -15,6 +15,19 @@ from openpyxl import Workbook
 
 gt_folder = '/home/ubuntu/data/LA_data_OneDrive'
 each_folder = 'Series 28-29-30-31-32-Part 1'
+each_folder = 'Series 28-29-30-31-32-Part 2'
+each_folder = 'Series 46-47-48-49-50-Part 1'
+each_folder = 'Series 5-6-7'
+each_folder = 'Series 51-52-53-54-55-56'
+each_folder = 'Series 57-58'
+each_folder = 'Series 59-60'
+each_folder = 'Series 61-62-63'
+each_folder = 'Series 64-65-66-67-68-69'
+each_folder = 'Series 8-9-10-11-12-13'
+each_folder = 'Series 14-15-16-17-18-19-20-21-22-23-24-25-26-27'
+each_folder = 'Series 46-47-48-49-50-Part 2'
+each_folder = 'Series 70-71-72-73-74-75-76-77-78'
+
 selected_folder = os.path.join(gt_folder,each_folder,'Image Data')
 mask_folder = os.path.join(gt_folder,each_folder,'Mask')
 shape_folder = os.path.join(gt_folder,each_folder,'Shapefiles-Buildings')
