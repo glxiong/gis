@@ -63,7 +63,7 @@ mask_files = os.listdir(mask_folder)
 
 count = 0
 for each_image in image_files:
-    if each_image in mask_files:
+    if each_image.endswith('.tif') and each_image in mask_files :
 
         status, idx, img_files,mask_files = CreateTileImages(image_folder,mask_folder,each_image,tile_size,tile_img_folder,tile_mask_folder )
 
