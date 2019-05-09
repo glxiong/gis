@@ -1,5 +1,5 @@
 import os
-from polygon_to_mask import convert_polygon_to_mask, convert_polygon_to_mask_w_shape
+from polygon_to_mask import convert_polygon_to_mask, convert_polygon_to_roadmask, convert_polygon_to_mask_w_shape
 # import fiona
 import time
 
@@ -16,12 +16,15 @@ shape_file = '/Users/sukryool.kang/data/GIS_data/LosAngeles_2017/LA__Road_Ground
 meta_file = '/Users/sukryool.kang/data/GIS_data/LosAngeles_2017/building_road_image_files.xlsx'
 
 #road
-# selected_folder = '/Users/sukryool.kang/data/GIS_data/LosAngeles_2017/Road_Images/33 Series'
-# mask_folder = '/Users/sukryool.kang/data/GIS_data/LosAngeles_2017/Road_Mask'
-# shape_file = '/Users/sukryool.kang/data/GIS_data/LosAngeles_2017/Phase 1 Road Polygon/Phase 1 Road Polygon.shp'
-# meta_file = '/Users/sukryool.kang/data/GIS_data/LosAngeles_2017/road_image_files.xlsx'
+#selected_folder = '/home/ubuntu/data/LA_data_OneDrive/Road Data/Series S-28 to S-32/Images'
+#mask_folder = '/home/ubuntu/data/LA_data_OneDrive/Road Data/Series S-28 to S-32/Mask'
+#shape_file = '/home/ubuntu/data/LA_data_OneDrive/Road Data/Series S-28 to S-32/Shapefiles/Roads_Groundtruth_S-28 to S-32.shp'
+#meta_file = '/home/ubuntu/data/LA_data_OneDrive/Road Data/Series S-28 to S-32/road_image_files.xlsx'
 
-
+selected_folder = '/home/ubuntu/data/LA_data_OneDrive/Road Data/Series S-46 to S-50/Images'
+mask_folder = '/home/ubuntu/data/LA_data_OneDrive/Road Data/Series S-46 to S-50/Mask'
+shape_file = '/home/ubuntu/data/LA_data_OneDrive/Road Data/Series S-46 to S-50/Shapefiles/Roads_Groundtruth_S-46 to S-50.shp'
+meta_file = '/home/ubuntu/data/LA_data_OneDrive/Road Data/Series S-46 to S-50/road_image_files.xlsx'
 
 if not os.path.exists(mask_folder):
     os.makedirs(mask_folder)
@@ -44,7 +47,8 @@ for each_file in file_list:
         print(each_file)
         input_file = os.path.join(selected_folder,each_file)
         output_file = os.path.join(mask_folder,each_file)
-        building_check, road_check = convert_polygon_to_mask(input_file,shape_file,output_file )
+        #building_check, road_check = convert_polygon_to_mask(input_file,shape_file,output_file )
+        building_check, road_check = convert_polygon_to_roadmask(input_file,shape_file,output_file )
         #building_check, road_check = convert_polygon_to_mask_w_shape(input_file,gt_shape,output_file )
         if building_check == True:
             building_image_files.append(each_file)

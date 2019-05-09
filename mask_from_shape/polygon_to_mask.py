@@ -304,3 +304,82 @@ def convert_polygon_to_mask(gis_image_file, shape_file, output_file):
     #print("Success: " + output_file + " was created.")
 
     return building_check, road_check
+
+def convert_polygon_to_roadmask(gis_image_file, shape_file, output_file):
+
+    ######################################################
+    # Extract reference coordinates from gis_image_file
+    ######################################################
+    src_ds = gdal.Open(gis_image_file, gdal.GA_ReadOnly)
+    gio_transform = src_ds.GetGeoTransform()
+    cols = src_ds.RasterXSize
+    rows = src_ds.RasterYSize
+    bands = src_ds.RasterCount
+    driver = src_ds.GetDriver().LongName
+
+    # close dataset
+    src_ds = None
+
+    # In a north up image, padfTransform[1] is the pixel width, and padfTransform[5] is the pixel height.
+    # The upper left corner of the upper left pixel is at position (padfTransform[0],padfTransform[3]).
+    top_left = [gio_transform[0],gio_transform[3]]
+    bottom_right = [gio_transform[0] + cols*gio_transform[1],gio_transform[3]+rows*gio_transform[5]]
+    pixel_size = [gio_transform[1], gio_transform[5]]
+
+
+    #building_value = 255
+    road_value = 255
+    
+    ##########################
+    #load shape shape_file
+    ##########################
+    gt_shape = fiona.open(shape_file)
+
+    x_range = [top_left[0],bottom_right[0]]
+    y_range = [bottom_right[1],top_left[1]]
+
+    road_insert = []
+    road_delete = []  # hole (Polygon inside Polygon)
+    
+    for idx,feat in enumerate(gt_shape):
+        # To-Do: Expand the coverage including other geo-data
+        if feat['geometry'] == None:
+            continue
+        #print(feat)
+        if feat['geometry']['type'] is 'MultiPolygon':
+            
+            points = feat['geometry']['coordinates'] 
+            
+            for each_point in points:
+                
+                road_insert.append(convertPoint(each_point[0],gio_transform))
+                for idx in range(1,len(each_point)):
+                    road_delete.append(convertPoint(each_point[idx],gio_transform))
+                
+        elif feat['geometry']['type'] is 'Polygon':
+            
+            points = feat['geometry']['coordinates'] 
+            
+            road_insert.append(convertPoint(points[0],gio_transform))
+            for idx in range(1,len(points)):
+                road_delete.append(convertPoint(points[idx],gio_transform))            
+ 
+
+    road_filename = output_file[:-4] + "_road" + output_file[-4:]
+
+    img_road = np.zeros((rows, cols), dtype=np.uint8)
+
+    if road_insert:
+        cv2.fillPoly(img_road,road_insert,(road_value))
+        cv2.fillPoly(img_road,road_delete,(0))
+        cv2.imwrite(road_filename, img_road)
+
+    building_check = False
+    road_check = False
+
+    if road_insert:
+        road_check = True
+
+    #print("Success: " + output_file + " was created.")
+
+    return building_check, road_check
