@@ -329,7 +329,7 @@ def convert_polygon_to_roadmask(gis_image_file, shape_file, output_file):
 
     #building_value = 255
     road_value = 255
-    
+
     ##########################
     #load shape shape_file
     ##########################
@@ -340,36 +340,39 @@ def convert_polygon_to_roadmask(gis_image_file, shape_file, output_file):
 
     road_insert = []
     road_delete = []  # hole (Polygon inside Polygon)
-    
+
     for idx,feat in enumerate(gt_shape):
         # To-Do: Expand the coverage including other geo-data
         if feat['geometry'] == None:
             continue
         #print(feat)
         if feat['geometry']['type'] is 'MultiPolygon':
-            
-            points = feat['geometry']['coordinates'] 
-            
+
+            points = feat['geometry']['coordinates']
+
             for each_point in points:
-                
+
                 road_insert.append(convertPoint(each_point[0],gio_transform))
-                print(convertPoint(each_point[0],gio_transform))
                 for idx in range(1,len(each_point)):
                     road_delete.append(convertPoint(each_point[idx],gio_transform))
-                    print(convertPoint(each_point[idx], gio_transform))
+
         elif feat['geometry']['type'] is 'Polygon':
-            
-            points = feat['geometry']['coordinates'] 
-            
+
+            points = feat['geometry']['coordinates']
+
             road_insert.append(convertPoint(points[0],gio_transform))
             for idx in range(1,len(points)):
-                road_delete.append(convertPoint(points[idx],gio_transform))            
- 
+                road_delete.append(convertPoint(points[idx],gio_transform))
+
 
     road_filename = output_file[:-4] + "_road" + output_file[-4:]
 
     img_road = np.zeros((rows, cols), dtype=np.uint8)
 
+
+    print(road_insert)
+    print(road_delete)
+    
     if road_insert:
         cv2.fillPoly(img_road,road_insert,(road_value))
         cv2.fillPoly(img_road,road_delete,(0))
@@ -377,6 +380,9 @@ def convert_polygon_to_roadmask(gis_image_file, shape_file, output_file):
 
     building_check = False
     road_check = False
+
+    if building_insert:
+        building_check = True
 
     if road_insert:
         road_check = True
