@@ -365,8 +365,8 @@ def convert_polygon_to_roadmask(gis_image_file, shape_file, output_file):
                 road_delete.append(convertPoint(points[idx],gio_transform))            
  
 
-    road_filename = output_file[:-4] + "_road" + output_file[-4:]
-
+    #road_filename = output_file[:-4] + "_road" + output_file[-4:]
+    road_filename = output_file
     img_road = np.zeros((rows, cols), dtype=np.uint8)
 
     if road_insert:

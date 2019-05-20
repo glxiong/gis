@@ -3,11 +3,23 @@ import os
 import numpy as np
 
 
-image_folder = '/home/ubuntu/data/LA_GT_data/Images'
-mask_folder =  '/home/ubuntu/data/LA_GT_data/Masks'
+image_folder = '/home/ubuntu/data/LA_GT_data_Road/Images'
+mask_folder =  '/home/ubuntu/data/LA_GT_data_Road/Masks'
 
-tile_mask_folder = '/home/ubuntu/data/LA_GT_data/TILE/masks'
-tile_img_folder = '/home/ubuntu/data/LA_GT_data/TILE/images'
+tile_mask_folder = '/home/ubuntu/data/LA_GT_data_Road/TILE/masks'
+tile_img_folder = '/home/ubuntu/data/LA_GT_data_Road/TILE/images'
+
+
+
+
+
+## test dat set 
+image_folder = '/home/ubuntu/data/LA_GT_data_Road/Images/test_set'
+mask_folder =  '/home/ubuntu/data/LA_GT_data_Road/Masks/test_set'
+
+tile_mask_folder = '/home/ubuntu/data/LA_GT_data_Road/TILE_test/masks'
+tile_img_folder = '/home/ubuntu/data/LA_GT_data_Road/TILE_test/images'
+
 
 # 7cm data -> tile_size
 tile_size = 500

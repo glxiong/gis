@@ -15,16 +15,40 @@ shape_file = '/Users/sukryool.kang/data/GIS_data/LosAngeles_2017/LA__Road_Ground
 #shape_file = '/Users/sukryool.kang/data/GIS_data/LosAngeles_2017/LA__Road_Ground_truth/Vector_LA_42-43-44-45/LA1-45-44-43-42.shp'
 meta_file = '/Users/sukryool.kang/data/GIS_data/LosAngeles_2017/building_road_image_files.xlsx'
 
-#road
+
+
+#road 
+
+f_name = 'Series S-5 to S-27'
+s_f_name = 'Roads_Groundtruth_S-5 to S-27.shp'
+
+f_name = 'Series S-28 to S-32'
+s_f_name = 'Roads_Groundtruth_S-28 to S-32.shp'
+
+f_name = 'Series S-46 to S-50'
+s_f_name = 'Roads_Groundtruth_S-46 to S-50.shp'
+
+f_name = 'Series S-59 to S-69'
+s_f_name = 'Roads_Groundtruth_S-59 to S-69_new_coor.shp'
+
+#f_name = 'Series S-70 to S-78'
+#s_f_name = 'Roads_Groundtruth_S-70 to S-78.shp'
+
+selected_folder = '/home/ubuntu/data/LA_data_OneDrive/Road Data/'+f_name + '/Images'
+mask_folder = '/home/ubuntu/data/LA_data_OneDrive/Road Data/' + f_name + '/Mask'
+shape_file = '/home/ubuntu/data/LA_data_OneDrive/Road Data/' + f_name + '/Shapefiles/' + s_f_name
+meta_file = '/home/ubuntu/data/LA_data_OneDrive/Road Data/' + f_name + '/road_image_files.xlsx'
+
+
 #selected_folder = '/home/ubuntu/data/LA_data_OneDrive/Road Data/Series S-28 to S-32/Images'
 #mask_folder = '/home/ubuntu/data/LA_data_OneDrive/Road Data/Series S-28 to S-32/Mask'
 #shape_file = '/home/ubuntu/data/LA_data_OneDrive/Road Data/Series S-28 to S-32/Shapefiles/Roads_Groundtruth_S-28 to S-32.shp'
 #meta_file = '/home/ubuntu/data/LA_data_OneDrive/Road Data/Series S-28 to S-32/road_image_files.xlsx'
 
-selected_folder = '/home/ubuntu/data/LA_data_OneDrive/Road Data/Series S-46 to S-50/Images'
-mask_folder = '/home/ubuntu/data/LA_data_OneDrive/Road Data/Series S-46 to S-50/Mask'
-shape_file = '/home/ubuntu/data/LA_data_OneDrive/Road Data/Series S-46 to S-50/Shapefiles/Roads_Groundtruth_S-46 to S-50.shp'
-meta_file = '/home/ubuntu/data/LA_data_OneDrive/Road Data/Series S-46 to S-50/road_image_files.xlsx'
+#selected_folder = '/home/ubuntu/data/LA_data_OneDrive/Road Data/Series S-46 to S-50/Images'
+#mask_folder = '/home/ubuntu/data/LA_data_OneDrive/Road Data/Series S-46 to S-50/Mask'
+#shape_file = '/home/ubuntu/data/LA_data_OneDrive/Road Data/Series S-46 to S-50/Shapefiles/Roads_Groundtruth_S-46 to S-50.shp'
+#meta_file = '/home/ubuntu/data/LA_data_OneDrive/Road Data/Series S-46 to S-50/road_image_files.xlsx'
 
 if not os.path.exists(mask_folder):
     os.makedirs(mask_folder)
